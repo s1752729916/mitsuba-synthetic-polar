@@ -1,0 +1,64 @@
+<scene version="2.1.0">
+
+<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+	<default name="spp" value="500"/>
+	<default name="resx" value="1920"/>
+	<default name="resy" value="1080"/>
+
+<!-- Camera and Rendering Parameters -->
+
+	<integrator type="path">
+		<integer name="max_depth" value="12"/>
+	</integrator>
+	<sensor type="perspective">
+		<string name="fov_axis" value="x"/>
+		<float name="fov" value="72.770734"/>
+		<float name="near_clip" value="0.100000"/>
+		<float name="far_clip" value="5000.000000"/>
+		<transform name="to_world">
+			<rotate x="1" angle="100.39870454942982"/>
+			<rotate y="1" angle="-89.96043521861628"/>
+			<rotate z="1" angle="-10.61965410739034"/>
+			<translate value="-1.951443 14.537573 -0.782547"/>
+		</transform>
+		<sampler type="independent">
+			<integer name="sample_count" value="$spp"/>
+		</sampler>
+		<film type="hdrfilm">
+			<integer name="width" value="$resx"/>
+			<integer name="height" value="$resy"/>
+		</film>
+	</sensor>
+
+<!-- Materials -->
+    <bsdf type="dielectric" id="glass"/>
+	<bsdf type="diffuse" id="mat-Material.001">
+		<rgb value="0.10000000 0.00000000 0.000000" name="reflectance"/>
+	</bsdf>
+	<bsdf type="roughdielectric" id="mat-材质">
+		<float name="alpha" value="0.001080"/>
+		<string name="distribution" value="beckmann"/>
+		<float name="int_ior" value="1.450000"/>
+		<rgb value="0.8000000 0.8000000 0.8000000" name="specular_transmittance"/>
+	</bsdf>
+	<bsdf type="twosided" id="default-bsdf">
+		<bsdf type="diffuse"/>
+	</bsdf>
+
+
+<!-- Emitters -->
+
+
+<!-- Shapes -->
+
+	<shape type="ply">
+		<string name="filename" value="meshes/Cube.001.ply"/>
+		<ref id="mat-Material.001" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/tiny-white.ply"/>
+		<ref id="mat-材质" name="bsdf"/>
+	</shape>
+
+</scene>

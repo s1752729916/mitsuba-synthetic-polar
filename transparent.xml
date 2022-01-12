@@ -1,0 +1,321 @@
+<scene version="2.1.0">
+
+<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+	<default name="spp" value="128"/>
+	<default name="resx" value="1920"/>
+	<default name="resy" value="1080"/>
+
+<!-- Camera and Rendering Parameters -->
+
+	<integrator type="path">
+		<integer name="max_depth" value="12"/>
+	</integrator>
+	<sensor type="perspective">
+		<string name="fov_axis" value="x"/>
+		<float name="fov" value="72.770734"/>
+		<float name="near_clip" value="0.100000"/>
+		<float name="far_clip" value="5000.000000"/>
+		<transform name="to_world">
+			<rotate x="1" angle="49.39870454942982"/>
+			<rotate y="1" angle="-89.96043521861628"/>
+			<rotate z="1" angle="-10.61965410739034"/>
+			<translate value="-1.951443 14.537573 -0.782547"/>
+		</transform>
+		<sampler type="independent">
+			<integer name="sample_count" value="$spp"/>
+		</sampler>
+		<film type="hdrfilm">
+			<integer name="width" value="$resx"/>
+			<integer name="height" value="$resy"/>
+		</film>
+	</sensor>
+
+<!-- Materials -->
+
+	<bsdf type="diffuse" id="mat-Material.001">
+		<rgb value="1.000000 0.000000 0.300000" name="reflectance"/>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-材质">
+		<rgb value="1.000000 0.000000 0.300000" name="reflectance"/>
+	</bsdf>
+	<bsdf type="twosided" id="default-bsdf">
+		<bsdf type="diffuse"/>
+	</bsdf>
+
+<!-- Emitters -->
+
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-1.000000 -0.000000 0.000000 0.000000 -0.000000 0.000000 1.000000 -224.743393 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.587778 -0.361796 -0.723616 162.625946 -0.000000 -0.894433 0.447201 -100.509636 -0.809022 -0.262855 -0.525728 118.153290 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.951061 0.138193 0.276378 -62.116379 -0.000000 -0.894423 0.447223 -100.509705 0.309002 -0.425336 -0.850651 191.177780 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.000000 0.447201 0.894434 -201.016388 -0.000000 -0.894434 0.447202 -100.508759 1.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.951062 0.138193 0.276378 -62.116379 -0.000000 -0.894423 0.447223 -100.509705 0.309002 0.425336 0.850651 -191.177780 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.587778 -0.361796 -0.723616 162.625946 -0.000000 -0.894433 0.447201 -100.509636 -0.809022 0.262855 0.525728 -118.153290 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.951061 0.138193 -0.276378 62.116379 0.000000 -0.894423 -0.447223 100.509705 -0.309002 0.425336 -0.850651 191.177780 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.587778 -0.361796 0.723616 -162.625946 0.000000 -0.894433 -0.447202 100.509636 0.809022 0.262855 -0.525728 118.153290 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.587778 -0.361796 0.723616 -162.625946 -0.000000 -0.894433 -0.447202 100.509636 0.809022 -0.262855 0.525728 -118.153290 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.951062 0.138193 -0.276378 62.116379 0.000000 -0.894423 -0.447223 100.509705 -0.309002 -0.425337 0.850651 -191.177780 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.000000 0.447202 -0.894433 201.016388 0.000000 -0.894433 -0.447202 100.508759 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-1.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 -1.000000 224.743393 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.951059 0.262860 0.162453 -36.510811 -0.000000 -0.525722 0.850656 -191.178955 0.309009 -0.809025 -0.499993 112.370628 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.587781 -0.688201 -0.425315 95.588455 -0.000000 -0.525716 0.850660 -191.178894 -0.809020 -0.500002 -0.309006 69.448265 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.951056 -0.162461 -0.262866 59.078030 0.000000 -0.850650 0.525733 -118.156059 -0.309018 -0.500001 -0.809016 181.820007 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.000000 -0.525721 -0.850657 191.177475 -0.000000 -0.850657 0.525721 -118.155670 -1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.587781 -0.688201 -0.425315 95.588455 -0.000000 -0.525716 0.850660 -191.178894 -0.809020 0.500002 0.309006 -69.448265 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.000000 0.850657 0.525721 -118.154289 -0.000000 -0.525721 0.850657 -191.178329 1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.587790 0.425324 0.688188 -154.666016 -0.000000 -0.850651 0.525732 -118.155739 0.809014 -0.309020 -0.500004 112.371010 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.951059 0.262860 0.162453 -36.510811 -0.000000 -0.525722 0.850656 -191.178955 0.309009 0.809025 0.499993 -112.370628 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.587790 0.425324 0.688188 -154.666016 -0.000000 -0.850651 0.525732 -118.155739 0.809014 0.309020 0.500004 -112.371010 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.951057 -0.162461 -0.262866 59.078030 -0.000000 -0.850650 0.525733 -118.156059 -0.309018 0.500001 0.809016 -181.820007 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.309004 -0.000000 -0.951061 213.743973 -0.000000 -1.000000 0.000000 0.000000 -0.951061 0.000000 -0.309004 69.448540 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.309004 0.000000 -0.951061 213.743973 0.000000 -1.000000 -0.000000 0.000000 -0.951061 -0.000000 0.309004 -69.448540 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="1.000000 0.000000 0.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 -1.000000 224.743378 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.809030 0.000000 -0.587767 132.100922 0.000000 -1.000000 -0.000000 0.000000 -0.587767 0.000000 -0.809030 181.821152 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.309004 0.000000 0.951061 -213.743973 0.000000 -1.000000 0.000000 0.000000 0.951061 0.000000 -0.309004 69.448540 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.809030 -0.000000 0.587767 -132.100922 -0.000000 -1.000000 -0.000000 0.000000 0.587767 0.000000 -0.809030 181.821152 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.809030 -0.000000 0.587767 -132.100922 0.000000 -1.000000 -0.000000 0.000000 0.587767 0.000000 0.809030 -181.821152 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.309004 -0.000000 0.951061 -213.743973 -0.000000 -1.000000 -0.000000 0.000000 0.951061 -0.000000 0.309004 -69.448540 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.809030 0.000000 -0.587767 132.100922 -0.000000 -1.000000 -0.000000 0.000000 -0.587767 0.000000 0.809030 -181.821152 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-1.000000 -0.000000 -0.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 -224.743378 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.587790 0.425324 -0.688188 154.666016 -0.000000 -0.850651 -0.525732 118.155739 -0.809014 0.309020 -0.500004 112.371010 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.951056 -0.162461 0.262866 -59.078030 0.000000 -0.850650 -0.525732 118.156059 0.309018 0.500001 -0.809016 181.820007 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.000000 -0.525721 0.850657 -191.177475 0.000000 -0.850657 -0.525721 118.155670 1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.951056 -0.162461 0.262866 -59.078030 -0.000000 -0.850650 -0.525732 118.156059 0.309018 -0.500001 0.809016 -181.820007 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.587790 0.425324 -0.688188 154.666016 -0.000000 -0.850650 -0.525732 118.155739 -0.809014 -0.309020 0.500004 -112.371010 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.951059 0.262860 -0.162453 36.510811 0.000000 -0.525722 -0.850657 191.178940 -0.309009 0.809025 -0.499993 112.370628 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.000000 0.850657 -0.525721 118.154289 -0.000000 -0.525721 -0.850657 191.178329 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="0.587782 -0.688201 0.425315 -95.588455 0.000000 -0.525716 -0.850660 191.178894 0.809020 0.500002 -0.309006 69.448265 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.587782 -0.688201 0.425315 -95.588455 -0.000000 -0.525716 -0.850660 191.178894 0.809020 -0.500002 0.309006 -69.448265 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="-0.951060 0.262860 -0.162453 36.510811 -0.000000 -0.525722 -0.850656 191.178940 -0.309009 -0.809025 0.499993 -112.370628 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+	<emitter type="directional">
+		<rgb value="1.000000 1.000000 1.000000" name="irradiance"/>
+		<transform name="to_world">
+			<matrix value="1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</emitter>
+
+<!-- Shapes -->
+
+	<shape type="ply">
+		<string name="filename" value="meshes/Cube.001.ply"/>
+		<ref id="mat-Material.001" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/plastic-cup.ply"/>
+		<ref id="mat-材质" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/棱角球.ply"/>
+		<ref id="default-bsdf" name="bsdf"/>
+	</shape>
+</scene>
