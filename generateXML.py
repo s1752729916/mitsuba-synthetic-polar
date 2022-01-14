@@ -4,16 +4,16 @@ import numpy as np
 import os
 
 origXMLpath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba/orig_pol.xml'
-objectPath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba/happy_vrip_front.ply'
-outputRoot = '/media/smq/移动硬盘/Research/Synthetic-Polar/happy-vrip-front/xml'
-outputNormalXml = '/media/smq/移动硬盘/Research/Synthetic-Polar/happy-vrip-front/normal-xml'
+objectPath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba/armadillo_front.ply'
+outputRoot = '/media/smq/移动硬盘/Research/Synthetic-Polar/armadillo-front/xml'
+outputNormalXml = '/media/smq/移动硬盘/Research/Synthetic-Polar/armadillo-front/normal-xml'
 
-sample_count = 100
-resolution_x = 500
-resolution_y = 500
+sample_count = 512
+resolution_x = 1232
+resolution_y = 1028
 lookat_origin = '0.0000,   8.0000,    0.000'  # x,y,z    Y is the height of camera
 lookat_target = '0.0,   0.0,   0.0'  # position of target
-emitter_radiance = '1.0,  1.0,   1.0'
+emitter_radiance = '1.0'
 
 for theta in range(0,72):
     dom = xmldom.parse(origXMLpath)
@@ -38,8 +38,8 @@ for theta in range(0,72):
 
     #-- 3. set illumination
     emitter = elements.getElementsByTagName('emitter')[0]
-    rgb = emitter.getElementsByTagName('rgb')[0]
-    rgb.setAttribute('value',emitter_radiance)
+    spectrum = emitter.getElementsByTagName('spectrum')[0]
+    spectrum.setAttribute('value',emitter_radiance)
     #-- 4. set object
     object = elements.getElementsByTagName('shape')[1]
     string = object.getElementsByTagName('string')[0]
@@ -57,18 +57,26 @@ for theta in range(0,72):
     elements = dom2.documentElement
     integrator = elements.getElementsByTagName('integrator')[0]
     elements.removeChild(integrator)
+
+    # change integrator to aov
     integrator = dom2.createElement('integrator')
     integrator = elements.appendChild(integrator)
     integrator.setAttribute('type','aov')
     string = dom2.createElement('string')
     string = integrator.appendChild(string)
     string.setAttribute('name','aovs')
-    string.setAttribute('value','dd.y:depth,nn:sh_normal')
+    string.setAttribute('value','dd.y:depth,nn:sh_normal,mm:mask')
+
+    # delete other models
+    cube = elements.getElementsByTagName('shape')[0]
+    ball = elements.getElementsByTagName('shape')[2]
+    elements.removeChild(cube)
+    elements.removeChild(ball)
 
 
     output_path = os.path.join(outputNormalXml, str(theta).zfill(3) + '-angles.xml')
     f = open(output_path, "w")
-    f.write(dom2.toprettyxml(indent=" "))
+    f.write(dom2.toprettyxml(indent=""))
     f.close()
     print('processing file: %s' % output_path)
 

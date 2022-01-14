@@ -76,9 +76,12 @@ for i in range(0,len(xml_list)):
     temp[0, :, :] = x
     temp[1, :, :] = y
     temp[2, :, :] = z
-    for row in range(0, x.shape[0]):
-        for col in range(0, x.shape[1]):
-            temp[:, row, col] = np.matmul(np.linalg.inv(transform), temp[:, row, col])
+    temp = temp.reshape([3,-1])
+    temp = np.matmul(np.linalg.inv(transform),temp)
+    temp = temp.reshape([3,x.shape[0],-1])
+    # for row in range(0, x.shape[0]):
+    #     for col in range(0, x.shape[1]):
+    #         temp[:, row, col] = np.matmul(np.linalg.inv(transform), temp[:, row, col])
     normals = np.ndarray([x.shape[0], x.shape[1], 3])
     x = temp[0, :, :]
     y = temp[1, :, :]
@@ -86,12 +89,12 @@ for i in range(0,len(xml_list)):
     normals[:, :, 0] = -x
     normals[:, :, 1] = y
     normals[:, :, 2] = -z
-    normals[np.where((x==-1) & (y==-1) &(z==1))] = -1
 
     normal_uint8 = ((normals + 1)*127.5).astype(np.uint8)
     mask = np.ndarray(x.shape,dtype=np.uint8)
     mask[:,:] = 255
-    mask[np.where((x==0) & (y==0) &(z==-1))] = 0
+    mask[np.where((x==0) & (y==0) &(z==0))] = 0
+
 
 
     #-- (3). save pictures
