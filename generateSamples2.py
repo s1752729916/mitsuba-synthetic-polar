@@ -12,7 +12,7 @@ from mitsuba.core.xml import load_file
 import xml.dom.minidom as xmldom
 from mitsuba.core import Bitmap, Struct
 import imageio
-root = '/media/smq/移动硬盘/Research/Synthetic-Polar/happy-vrip-front'
+root = '/media/smq/移动硬盘/Research/Synthetic-Polar/middle-round-cup'
 xml_path = os.path.join(root,'xml')
 normal_xml_path = os.path.join(root,'normal-xml')
 #-- 1. get all xml files

@@ -44,7 +44,7 @@ def getSensorTransform(sensor):
                 nums.append(float(m[0]))
     transform = np.array(nums).reshape([4,4])[0:3,0:3]
     return transform
-root = '/media/smq/移动硬盘/Research/Synthetic-Polar/happy-vrip-front'
+root = '/media/smq/移动硬盘/Research/Synthetic-Polar/middle-round-cupe'
 xml_path = os.path.join(root,'normal-xml')
 normal_xml_path = os.path.join(root,'normal-xml')
 #-- 1. get all xml files

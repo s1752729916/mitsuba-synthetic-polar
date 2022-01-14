@@ -57,7 +57,7 @@ def getSensorTransform(sensor):
 
 
 # Load an XML file which specifies "mydirectintegrator" as the scene's integrator
-filename = '/media/smq/移动硬盘/Research/Synthetic-Polar/plastic-cup/normal-xml/000-angles.xml'
+filename = '/media/smq/移动硬盘/Research/Synthetic-Polar/middle-round-cup/normal-xml/000-angles.xml'
 Thread.thread().file_resolver().append(os.path.dirname(filename))
 scene = load_file(filename)
 print(scene.sensors()[0])

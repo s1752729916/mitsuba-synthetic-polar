@@ -4,15 +4,15 @@ import numpy as np
 import os
 
 origXMLpath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba/orig_pol.xml'
-objectPath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba/plastic-cup.ply'
-outputRoot = '/media/smq/移动硬盘/Research/Synthetic-Polar/plastic-cup/xml'
-outputNormalXml = '/media/smq/移动硬盘/Research/Synthetic-Polar/plastic-cup/normal-xml'
+objectPath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba/happy_vrip_front.ply'
+outputRoot = '/media/smq/移动硬盘/Research/Synthetic-Polar/happy-vrip-front/xml'
+outputNormalXml = '/media/smq/移动硬盘/Research/Synthetic-Polar/happy-vrip-front/normal-xml'
 
-sample_count = 512
-resolution_x = 1232
-resolution_y = 1028
-lookat_origin = '1.0000,   10.0000,    -3.8000'  # x,y,z    Y is the height of camera
-lookat_target = '1.0,   0.0,   -3.8'  # position of target
+sample_count = 100
+resolution_x = 500
+resolution_y = 500
+lookat_origin = '0.0000,   8.0000,    0.000'  # x,y,z    Y is the height of camera
+lookat_target = '0.0,   0.0,   0.0'  # position of target
 emitter_radiance = '1.0,  1.0,   1.0'
 
 for theta in range(0,72):
