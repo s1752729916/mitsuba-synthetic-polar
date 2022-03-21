@@ -1,4 +1,5 @@
 # -*-coding:utf-8-*-
+# -*-coding:utf-8-*-
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -12,9 +13,8 @@ from mitsuba.core.xml import load_file
 import xml.dom.minidom as xmldom
 from mitsuba.core import Bitmap, Struct
 import imageio
-root = '/media/smq/移动硬盘/Research/Synthetic-Polar/bun-zipper-back'
+root = '/media/smq/移动硬盘/Research/TransMVS/synthetic/bear'
 xml_path = os.path.join(root,'xml')
-normal_xml_path = os.path.join(root,'normal-xml')
 #-- 1. get all xml files
 xml_list = glob.glob(os.path.join(xml_path,'*.xml'))
 print('found %d xml files.' % len(xml_list))
@@ -22,7 +22,7 @@ print('found %d xml files.' % len(xml_list))
 #-- 2. process files
 for i in range(0,len(xml_list)):
     #-- (1). render polarization
-    xml_file = os.path.join(xml_path,str(i).zfill(3)+'-angles.xml')
+    xml_file = os.path.join(xml_path,str(i).zfill(3)+'-view.xml')
     dom = xmldom.parse(xml_file)
     scene = load_file(xml_file)
     sensor = scene.sensors()[0]
@@ -56,13 +56,13 @@ for i in range(0,len(xml_list)):
     I_135_uint8 = np.round(I_135*255).astype(np.uint8)
 
     #-- (3). save pictures
-    I_0_output_path = os.path.join(os.path.join(root,'I-0'),str(i).zfill(3)+'-angles.png')
-    I_45_output_path = os.path.join(os.path.join(root,'I-45'),str(i).zfill(3)+'-angles.png')
-    I_90_output_path = os.path.join(os.path.join(root,'I-90'),str(i).zfill(3)+'-angles.png')
-    I_135_output_path = os.path.join(os.path.join(root,'I-135'),str(i).zfill(3)+'-angles.png')
-    I_sum_output_path = os.path.join(os.path.join(root,'I-sum'),str(i).zfill(3)+'-angles.png')
-    DoLP_output_path = os.path.join(os.path.join(os.path.join(root,'params'),'DoLP'),str(i).zfill(3)+'-angles.png')
-    AoLP_output_path = os.path.join(os.path.join(os.path.join(root,'params'),'AoLP'),str(i).zfill(3)+'-angles.png')
+    I_0_output_path = os.path.join(os.path.join(root,'I-0'),str(i).zfill(3)+'-view.png')
+    I_45_output_path = os.path.join(os.path.join(root,'I-45'),str(i).zfill(3)+'-view.png')
+    I_90_output_path = os.path.join(os.path.join(root,'I-90'),str(i).zfill(3)+'-view.png')
+    I_135_output_path = os.path.join(os.path.join(root,'I-135'),str(i).zfill(3)+'-view.png')
+    I_sum_output_path = os.path.join(os.path.join(root,'I-sum'),str(i).zfill(3)+'-view.png')
+    DoLP_output_path = os.path.join(os.path.join(os.path.join(root,'params'),'DoLP'),str(i).zfill(3)+'-view.png')
+    AoLP_output_path = os.path.join(os.path.join(os.path.join(root,'params'),'AoLP'),str(i).zfill(3)+'-view.png')
 
     imageio.imwrite(I_0_output_path,I_0_uint8)
     imageio.imwrite(I_45_output_path,I_45_uint8)
