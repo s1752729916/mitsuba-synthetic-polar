@@ -7,14 +7,14 @@ sys.path.append('/media/disk2/smq_data/mitsuba2/build/dist/python/')
 import glob
 import mitsuba
 mitsuba.set_variant('scalar_spectral_polarized')
-mitsuba.core.set_thread_count(32)
+mitsuba.core.set_thread_count(64)
 import numpy as np
 import enoki as ek
 from mitsuba.core.xml import load_file
 import xml.dom.minidom as xmldom
 from mitsuba.core import Bitmap, Struct
 import imageio
-root = '/media/disk2/smq_data/samples/TransMVS/synthetic/hemi-sphere-big'
+root = '/media/disk2/smq_data/samples/TransMVS/synthetic/cow-3'
 xml_path = os.path.join(root,'xml')
 #-- 1. get all xml files
 xml_list = glob.glob(os.path.join(xml_path,'*.xml'))

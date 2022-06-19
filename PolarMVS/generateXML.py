@@ -3,12 +3,11 @@ import xml.dom.minidom as xmldom
 import numpy as np
 import os
 from PolarMVS.generateCamPos import generatePostions
-
 # params setup
-origXMLpath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba_mvs/orig-polar.xml'
-objectPath = '/media/smq/移动硬盘/blender/mesh_for_mitsuba_mvs/meshes/bear.ply'
-outputRoot = '/media/smq/移动硬盘/Research/TransMVS/synthetic/bear/xml'
-outputNormalXml = '/media/smq/移动硬盘/Research/TransMVS/synthetic/bear/normal-xml'
+origXMLpath = '/media/disk2/smq_data/blender/mesh_for_mitsuba_mvs/orig-polar-server.xml'
+objectPath = '/media/disk2/smq_data/blender/mesh_for_mitsuba_mvs/meshes/cow.ply'
+outputRoot = '/media/disk2/smq_data/samples/TransMVS/synthetic/cow-3/xml'
+outputNormalXml = '/media/disk2/smq_data/samples/TransMVS/synthetic/cow-3/normal-xml'
 
 sample_count = 512
 resolution_x = 1232
@@ -19,15 +18,15 @@ lookat_up = '0.0,    1.0,    0.0'
 
 
 # generate camera positions
-theta_min = 20
+theta_min = 40
 theta_max = 80
 phi_min = 0
 phi_max = 360
-R = 5
+R = 7
 center = [0, 5, 0]
 numOfPositions = 40
 positions = generatePostions(theta_min=theta_min,theta_max=theta_max,phi_min=phi_min,phi_max=phi_max,R=R,center=center,num=numOfPositions)
-
+# positions = generatePositionsUniform(phi_min,phi_max,20,80,R,center)
 # generate xml files
 for i in range(0,len(positions)):
     lookat_origin = str(positions[i][0]) +','+ str(positions[i][1]) +','+ str(positions[i][2])
@@ -73,7 +72,7 @@ for i in range(0,len(positions)):
     string = dom2.createElement('string')
     string = integrator.appendChild(string)
     string.setAttribute('name','aovs')
-    string.setAttribute('value','dd.y:depth,nn:sh_normal,mm:mask')
+    string.setAttribute('value','dd.y:depth,nn:sh_normal')
 
     # delete other models
     cube = elements.getElementsByTagName('shape')[0]

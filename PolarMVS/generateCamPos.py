@@ -20,7 +20,17 @@ def generatePostions(phi_min,phi_max,theta_min,theta_max,num,R,center):
         x,y,z = sphere_surface(R,phi,theta,center)
         positions.append([x,y,z])
     return positions
+def generatePositionsUniform(phi_min,phi_max,phi_interval,theta,R,center):
+    positions = []
+    theta = theta * np.pi / 180
 
+    num = int((phi_max-phi_min)/phi_interval)
+    for i in range(0,num):
+        phi = phi_min + i*phi_interval
+        phi = phi*np.pi/180
+        x,y,z = sphere_surface(R,phi,theta,center)
+        positions.append([x,y,z])
+    return positions
 
 
 if __name__ =='__main__':

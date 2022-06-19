@@ -2,10 +2,12 @@
 import os
 import sys
 import matplotlib.pyplot as plt
-sys.path.append('/home/smq/mitsuba2/build/dist/python')
+sys.path.append('/media/disk2/smq_data/mitsuba2/build/dist/python/')
 import glob
 import mitsuba
 mitsuba.set_variant('scalar_spectral')
+mitsuba.core.set_thread_count(32)
+
 import numpy as np
 import enoki as ek
 from mitsuba.core.xml import load_file
@@ -46,7 +48,7 @@ def getSensorTransform(sensor):
     transform = np.array(nums).reshape([4,4])
     return transform
 
-root = '/media/smq/移动硬盘/Research/TransMVS/synthetic/bear'
+root = '/media/disk2/smq_data/samples/TransMVS/synthetic/cow-3'
 normal_xml_path = os.path.join(root,'normal-xml')
 #-- 1. get all xml files
 xml_list = glob.glob(os.path.join(normal_xml_path,'*.xml'))
@@ -114,12 +116,17 @@ for i in range(0,len(xml_list)):
     resx_dom = elements.getElementsByTagName('default')[1]
     resy_dom = elements.getElementsByTagName('default')[2]
     fov_dom = elements.getElementsByTagName('float')[0]
+    lookat = elements.getElementsByTagName('lookat')[0]
+    lookat_origin = lookat.getAttribute('origin')
+    lookat_target = lookat.getAttribute('target')
+    lookat_up = lookat.getAttribute('up')
+
     resx = resx_dom.getAttribute('value')
     resy = resy_dom.getAttribute('value')
     fov = fov_dom.getAttribute('value')
 
     transform = transform.tolist()   # local to world transform(cam to world)
-    data = [{'intrinsic':[{'fov':fov,'resx':resx,'resy':resy}],'extrinsic':transform}]
+    data = [{'intrinsic':[{'fov':fov,'resx':resx,'resy':resy}],'extrinsic':transform,'extrinsic_lookat':[{'origin':lookat_origin,'target':lookat_target,'up':lookat_up}]}]
     jsonData = json.dumps(data,indent=1)
     #-- 5. save json files
     json_output_path = os.path.join(os.path.join(root,'json'),str(i).zfill(3)+'-view.json')
