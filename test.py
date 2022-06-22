@@ -1,1 +1,105 @@
 # -*-coding:utf-8-*-
+
+import os
+import sys
+import matplotlib.pyplot as plt
+sys.path.append('/media/disk2/smq_data/mitsuba2/build/dist/python/')
+import glob
+import mitsuba
+mitsuba.set_variant('scalar_spectral_polarized')
+mitsuba.core.set_thread_count(32)
+
+import numpy as np
+import enoki as ek
+from mitsuba.core.xml import load_file
+import xml.dom.minidom as xmldom
+from mitsuba.core import Bitmap, Struct
+import json
+import imageio
+import re
+class __Autonomy__(object):
+    def __init__(self):
+        """
+         init
+         """
+        self._buff = ""
+    def write(self, out_stream):
+        """
+         :param out_stream: :
+         return: """
+        self._buff += out_stream
+
+def getSensorTransform(sensor):
+    current = sys.stdout
+    m_out = __Autonomy__()
+    sys.stdout = m_out
+    print(sensor.world_transform())
+    sys.stdout = current
+    A = m_out._buff[37:].split(',')
+    nums = []
+    for a in A:
+        m = re.search(r'[-+]?\d+\.\d+([Ee]-?\d+)?', a)
+        if(m is not None):
+            nums.append(float(m.group()))
+        else:
+            m = re.findall(r'-?\d+',a)
+            if(len(m)==1):
+                nums.append(float(m[0]))
+    transform = np.array(nums).reshape([4,4])
+    return transform
+
+
+xml_file = '/media/disk2/smq_data/samples/TransMVS/synthetic/cow-3/xml/000-view.xml'
+scene = load_file(xml_file)
+sensor = scene.sensors()[0]
+transform = getSensorTransform(sensor)
+print('world_transform',sensor.world_transform())
+# print('transform:\n',transform)
+
+scene.integrator().render(scene, sensor)
+film = sensor.film()
+img = film.bitmap()
+img_np = np.array(img).astype(np.float32)
+# 5£¬6£¬7 is s0, 8 9 10 is s1
+s0 = img_np[:, :, 4]
+s1 = img_np[:, :, 7]
+s2 = img_np[:, :, 10]
+s3 = img_np[:, :, 13]
+DoLP = np.sqrt(s1 ** 2 + s2 ** 2) / s0
+DoLP[np.where(np.isnan(DoLP))] = 0
+AoLP = 1 / 2.0 * np.arctan2(s2, s1)
+dolp_uint8 = (DoLP * 255).astype(np.uint8)
+aolp_uint8 = (((np.round(AoLP * 180 / np.pi) % 180) / 180.0) * 255).astype(np.uint8)
+
+# -- (2). get I_0,I_45,I_90,I_135
+
+I_sum = s0
+
+I_0 = I_sum / 2.0 + DoLP * I_sum * np.cos(2 * (AoLP - 0))
+I_45 = I_sum / 2.0 + DoLP * I_sum * np.cos(2 * (AoLP - np.pi / 4.0))
+I_90 = I_sum / 2.0 + DoLP * I_sum * np.cos(2 * (AoLP - np.pi / 2.0))
+I_135 = I_sum / 2.0 + DoLP * I_sum * np.cos(2 * (AoLP - 3 * np.pi / 4.0))
+
+I_sum_uint8 = np.round(I_sum * 255).astype(np.uint8)
+I_0_uint8 = np.round(I_0 * 255).astype(np.uint8)
+I_45_uint8 = np.round(I_45 * 255).astype(np.uint8)
+I_90_uint8 = np.round(I_90 * 255).astype(np.uint8)
+I_135_uint8 = np.round(I_135 * 255).astype(np.uint8)
+
+# -- (3). save pictures
+I_0_output_path = '/media/disk2/smq_data/samples/TransMVS/I0.png'
+I_45_output_path = '/media/disk2/smq_data/samples/TransMVS/I45.png'
+I_90_output_path = '/media/disk2/smq_data/samples/TransMVS/I90.png'
+I_135_output_path = '/media/disk2/smq_data/samples/TransMVS/I135.png'
+I_sum_output_path = '/media/disk2/smq_data/samples/TransMVS/Isum.png'
+DoLP_output_path = '/media/disk2/smq_data/samples/TransMVS/DoLP.png'
+AoLP_output_path = '/media/disk2/smq_data/samples/TransMVS/AoLP.png'
+
+imageio.imwrite(I_0_output_path, I_0_uint8)
+imageio.imwrite(I_45_output_path, I_45_uint8)
+imageio.imwrite(I_90_output_path, I_90_uint8)
+imageio.imwrite(I_135_output_path, I_135_uint8)
+imageio.imwrite(I_sum_output_path, I_sum_uint8)
+imageio.imwrite(DoLP_output_path, dolp_uint8)
+imageio.imwrite(AoLP_output_path, aolp_uint8)
+

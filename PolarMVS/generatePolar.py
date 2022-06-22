@@ -14,8 +14,8 @@ from mitsuba.core.xml import load_file
 import xml.dom.minidom as xmldom
 from mitsuba.core import Bitmap, Struct
 import imageio
-root = '/media/disk2/smq_data/samples/TransMVS/synthetic/hemi-sphere-big'
-xml_path = os.path.join(root,'xml')
+root = '/media/disk2/smq_data/samples/TransMVS/synthetic/cow-3'
+xml_path = os.path.join(root,'xml-2')
 #-- 1. get all xml files
 xml_list = glob.glob(os.path.join(xml_path,'*.xml'))
 print('found %d xml files.' % len(xml_list))

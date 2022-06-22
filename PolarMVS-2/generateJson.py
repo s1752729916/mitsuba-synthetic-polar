@@ -17,7 +17,6 @@ import json
 import imageio
 import re
 class __Autonomy__(object):
-    """ 自定义变量的write方法 """
     def __init__(self):
         """
          init
@@ -63,52 +62,8 @@ for i in range(0,len(xml_list)):
     transform = getSensorTransform(sensor)
     print('world_transform',sensor.world_transform())
     print('transform:\n',transform)
-    scene.integrator().render(scene, sensor)
-    film = sensor.film()
-
-    from mitsuba.core import Bitmap, Struct
-
-    img = film.bitmap(raw = False)
-    img_np = np.array(img).astype(np.float32)
-    import matplotlib.pyplot as plt
-
-    x = img_np[:, :, 5]  # world space
-    y = img_np[:, :, 6]
-    z = img_np[:, :, 7]
-    temp = np.ndarray([3, x.shape[0], x.shape[1]])
-    temp[0, :, :] = x
-    temp[1, :, :] = y
-    temp[2, :, :] = z
-    temp = temp.reshape([3,-1])
-    temp = np.matmul(np.linalg.inv(transform[0:3,0:3]),temp)  # to camera space
-    temp = temp.reshape([3,x.shape[0],-1])
-    # for row in range(0, x.shape[0]):
-    #     for col in range(0, x.shape[1]):
-    #         temp[:, row, col] = np.matmul(np.linalg.inv(transform), temp[:, row, col])
-    normals = np.ndarray([x.shape[0], x.shape[1], 3])
-    x = temp[0, :, :]
-    y = temp[1, :, :]
-    z = temp[2, :, :]
-    normals[:, :, 0] = -x
-    normals[:, :, 1] = y
-    normals[:, :, 2] = -z
-
-    normal_uint8 = ((normals + 1)*127.5).astype(np.uint8)
-    mask = np.ndarray(x.shape,dtype=np.uint8)
-    mask[:,:] = 255
-    mask[np.where((x==0) & (y==0) &(z==0))] = 0
 
 
-
-    #-- (3). save pictures
-    normal_output_path = os.path.join(os.path.join(root,'normals-png'),str(i).zfill(3)+'-view.png')
-    exr_output_path = os.path.join(os.path.join(root,'normals-exr'),str(i).zfill(3)+'-angles.exr')
-    mask_output_path = os.path.join(os.path.join(root,'masks'),str(i).zfill(3)+'-view.png')
-
-    imageio.imwrite(normal_output_path,normal_uint8)
-    imageio.imwrite(mask_output_path,mask)
-    film.set_destination_file(exr_output_path)
-    film.develop()
 
     #-- 4. get intrinsic/extrinsic matrix
     dom = xmldom.parse(xml_file)

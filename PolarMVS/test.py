@@ -1,7 +1,7 @@
 # -*-coding:utf-8-*-
 import os
 import sys
-sys.path.append('/home/smq/mitsuba2/build/dist/python')
+sys.path.append('/media/disk2/smq_data/mitsuba2/build/dist/python/')
 
 import glob
 import mitsuba
@@ -13,7 +13,7 @@ import xml.dom.minidom as xmldom
 from mitsuba.core import Bitmap, Struct
 import imageio
 import matplotlib.pyplot as plt
-xml_path = '/media/smq/移动硬盘/blender/mesh_for_mitsuba_mvs/transparent_MVS.xml'
+xml_path = '/media/disk2/smq_data/blender/mesh_for_mitsuba/orig_pol.xml'
 scene = load_file(xml_path)
 sensor = scene.sensors()[0]
 scene.integrator().render(scene, sensor)
